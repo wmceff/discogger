@@ -1,0 +1,29 @@
+<%= form_for(@query) do |f| %>
+  <% if @query.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@query.errors.count, "error") %> prohibited this query from being saved:</h2>
+
+      <ul>
+      <% @query.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :query_string %><br>
+    <%= f.text_area :query_string %>
+  </div>
+  <div class="field">
+    <%= f.label :total_pages %><br>
+    <%= f.number_field :total_pages %>
+  </div>
+  <div class="field">
+    <%= f.label :completed_page %><br>
+    <%= f.number_field :completed_page %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

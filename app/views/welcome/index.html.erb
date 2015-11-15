@@ -1,0 +1,13 @@
+<div class="indexer">
+  <% if @done %>
+    <h1>DONE</h1>
+  <% else %>
+    <h1>Indexed more stuff.</h1>
+    <a href="/records">HERE</a>
+    <%= debug(@url) %>
+    <h2>Current Query</h2>
+    <%= debug(@query) %>
+    <%#= debug(@search) %>
+    <%#= debug(@records) %>
+  <% end %>
+</div>

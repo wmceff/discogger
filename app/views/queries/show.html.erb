@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Query string:</strong>
+  <%= @query.query_string %>
+</p>
+
+<p>
+  <strong>Total pages:</strong>
+  <%= @query.total_pages %>
+</p>
+
+<p>
+  <strong>Completed page:</strong>
+  <%= @query.completed_page %>
+</p>
+
+<%= link_to 'Edit', edit_query_path(@query) %> |
+<%= link_to 'Back', queries_path %>

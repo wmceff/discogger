@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rating: 1.5
+  count: 1
+  want: 1
+  discogs_id: 1
+  title: MyString
+  uri: MyString
+
+two:
+  rating: 1.5
+  count: 1
+  want: 1
+  discogs_id: 1
+  title: MyString
+  uri: MyString
