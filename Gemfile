@@ -15,3 +15,4 @@ gem 'spring',        group: :development
 gem 'oauth'
 gem 'unicorn'
 gem 'resque'
+gem 'nokogiri'

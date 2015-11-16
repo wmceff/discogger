@@ -1,14 +1,9 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  # protect_from_forgery with: :null_session
-
   before_action :authenticate_with_discogs
 
   def authenticate_with_discogs
     logger.debug session[:request_token].inspect
-    #logger.debug session[:access_token].inspect
-    require 'oauth' 
+    logger.debug session[:access_token].inspect
     if params[:oauth_token]
       @request_token = session[:request_token]
       @access_token = @request_token.get_access_token(

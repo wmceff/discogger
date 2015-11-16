@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140728052635) do
+ActiveRecord::Schema.define(version: 20151115075236) do
 
-  create_table "queries", force: true do |t|
+  create_table "queries", force: :cascade do |t|
     t.text     "query_string"
     t.integer  "total_pages"
     t.integer  "completed_page"
@@ -21,16 +21,21 @@ ActiveRecord::Schema.define(version: 20140728052635) do
     t.datetime "updated_at"
   end
 
-  create_table "records", force: true do |t|
+  create_table "records", force: :cascade do |t|
     t.float    "rating"
     t.integer  "count"
     t.integer  "want"
     t.integer  "discogs_id"
-    t.string   "title"
-    t.string   "uri"
+    t.string   "title",        limit: 255
+    t.string   "uri",          limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status",     default: 0
+    t.integer  "status",                   default: 0
+    t.integer  "query_id"
+    t.decimal  "median_price"
+    t.decimal  "high_price"
   end
+
+  add_index "records", ["query_id"], name: "index_records_on_query_id"
 
 end

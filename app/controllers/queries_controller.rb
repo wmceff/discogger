@@ -12,6 +12,12 @@ class QueriesController < ApplicationController
   def show
   end
 
+  def run
+    @query = Query.find(params[:query_id])
+    RunQueryJob.perform_later(@query.id, @access_token.token, @access_token.secret)
+    redirect_to :back
+  end
+
   # GET /queries/new
   def new
     @query = Query.new

@@ -1,4 +1,6 @@
 class Query < ActiveRecord::Base
+  has_many :records
+
   def query_url
     if total_pages.nil?
       query_string 
