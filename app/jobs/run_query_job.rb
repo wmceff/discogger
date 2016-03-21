@@ -4,7 +4,9 @@ class RunQueryJob < ActiveJob::Base
   def perform(query_id, oauth_token, oauth_token_secret)
     puts 'performing job!'
     @query = Query.find(query_id)
-    consumer = OAuth::Consumer.new("YZoEeqSZnAghnSYoicnS", "wexOTYuQeVPqbxMGtBRMMMhakBIUIzDt", :site => "http://api.discogs.com")
+    consumer = OAuth::Consumer.new("YZoEeqSZnAghnSYoicnS",
+                                   "wexOTYuQeVPqbxMGtBRMMMhakBIUIzDt",
+                                   :site => "https://api.discogs.com")
     @access_token = OAuth::AccessToken.new(consumer, oauth_token, oauth_token_secret)
 
     fetch_page

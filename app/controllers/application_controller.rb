@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
         @callback_url = "http://localhost:3000/oauth/callback"
         @consumer = OAuth::Consumer.new("YZoEeqSZnAghnSYoicnS",
                                         "wexOTYuQeVPqbxMGtBRMMMhakBIUIzDt",
-                                        :site => "http://api.discogs.com")
+                                        :site => "https://api.discogs.com")
         @request_token = @consumer.get_request_token(:oauth_callback => @callback_url)
         session[:request_token] = @request_token
         redirect_to @request_token.authorize_url(:oauth_callback => @callback_url).gsub("api.","www.")
