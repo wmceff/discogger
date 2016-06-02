@@ -38,7 +38,8 @@
   </thead>
 
   <tbody>
-    <% @query.records.order('median_price DESC').each do |record| %>
+    <% @query.records.order('rating DESC').each do |record| %>
+    <% @query.records.order('rating DESC') #median_price DESC').each do |record| %>
       <tr style="background-color:<%= cycle('#AAA', '#FFF') %>">
         <td><%= record.rating %></td>
         <td><%= record.count %></td>
