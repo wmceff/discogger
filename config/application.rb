@@ -13,8 +13,9 @@ module Discogger
     
     config.x.thresholds = {
       rating: 4, # minimum rating to consider
-      num_ratings: 5, # min number of raters to consider
-      median_price: 20.00 
+      num_ratings: 10, # min number of raters to consider
+      num_wants: 20,
+      median_price: 15.00 
     }
   end
 end
