@@ -33,6 +33,7 @@ class QueriesController < ApplicationController
     @query = Query.new(query_params)
 
     respond_to do |format|
+      @query.query_string = @query.query_string.strip
       if @query.save
         format.html { redirect_to @query, notice: 'Query was successfully created.' }
         format.json { render :show, status: :created, location: @query }

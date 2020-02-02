@@ -14,6 +14,7 @@ class RunQueryJob < ActiveJob::Base
 
     loop do
       puts "fetchig next page"
+      sleep(2)
       fetch_page
       break if @query.completed_page >= @query.total_pages 
     end
@@ -21,6 +22,7 @@ class RunQueryJob < ActiveJob::Base
 
   def fetch_page
     puts "getting result"
+    puts "'#{@query.query_url}'"
     @search = @access_token.get(@query.query_url)
     puts "got it"
     @search = JSON.parse(@search.body)
@@ -40,29 +42,51 @@ class RunQueryJob < ActiveJob::Base
 
     @records.each do |record|
       puts "sleeping..."
-      sleep(1.1) #respect their ratelimit
+      sleep(2) #respect their ratelimit
       puts "looking at a record"
-      record = @access_token.get('/releases/'+record["id"].to_s)
-      record = JSON.parse(record.body)
+      puts record["type"]
+
+      if record["type"] == "master"
+        master = @access_token.get('/masters/'+record["master_id"].to_s)
+        master = JSON.parse(master.body)
+        record = @access_token.get('/releases/'+master["main_release"].to_s)
+        record = JSON.parse(record.body)
+
+        # if the master and the record are the same year then lets go with that
+        # this filters out reissues and stuff which are usually noisy
+        if master['year'] != record['year']
+          puts "skipping #{record['title']} - #{record['artists'][0]['name']}"
+          next
+        end
+      else
+        record = @access_token.get('/releases/'+record["id"].to_s)
+        record = JSON.parse(record.body)
+      end
+      
+      # puts record
       if (record && record["community"] &&
           record["community"]["rating"]["average"].to_f > Rails.configuration.x.thresholds[:rating] &&
           record["community"]["rating"]["count"].to_f > Rails.configuration.x.thresholds[:num_ratings])
         puts 'rating is good, fetching pricing'
         puts record["uri"]
-        # grab its median sale
-        require 'open-uri'
+        # grab its median sale -- TODO: they broke this
+        # require 'open-uri'
         begin
+=begin
           sleep(1.1) # respect this lookup ratelimit too
           page = Nokogiri::HTML(open(record["uri"], :read_timeout => 5, 'User-Agent' => 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'))
 
           if page.css('.statistics .last li')
+            puts page.css('.statistics .last li')
             median_price = page.css('.statistics .last li')[2].text[/\d+(\.\d{1,2})?/].to_f
+            puts page.css('.statistics .last li')
             high_price = page.css('.statistics .last li')[3].text[/\d+(\.\d{1,2})?/].to_f
           end
 
           if median_price < Rails.configuration.x.thresholds[:median_price]
             puts "median price not high enough, skpping"
           else
+=end
             puts "adding "+record["title"]
 
             Record.create(
@@ -71,12 +95,12 @@ class RunQueryJob < ActiveJob::Base
               want: record["community"]["want"],
               title: record["title"],
               uri: record["uri"],
-              median_price: median_price,
-              high_price: high_price,
+              # median_price: median_price,
+              # high_price: high_price,
               discogs_id: record["id"],
               query_id: @query.id
             )
-          end
+          # end
         rescue Exception => e
           puts "error:"
           puts e

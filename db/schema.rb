@@ -26,11 +26,11 @@ ActiveRecord::Schema.define(version: 20151115075236) do
     t.integer  "count"
     t.integer  "want"
     t.integer  "discogs_id"
-    t.string   "title",        limit: 255
-    t.string   "uri",          limit: 255
+    t.string   "title"
+    t.string   "uri"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status",                   default: 0
+    t.integer  "status",       default: 0
     t.integer  "query_id"
     t.decimal  "median_price"
     t.decimal  "high_price"
