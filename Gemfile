@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 gem 'rails', '~> 4.2'
-gem 'sqlite3'
+gem 'sqlite3', '~> 1.3.6'
 
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
@@ -16,3 +16,4 @@ gem 'oauth'
 gem 'unicorn'
 gem 'resque'
 gem 'nokogiri'
+gem 'did_you_mean'
