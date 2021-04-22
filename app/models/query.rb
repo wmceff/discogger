@@ -12,4 +12,8 @@ class Query < ActiveRecord::Base
       end
     end
   end
+
+  def to_s
+    query_string
+  end
 end
