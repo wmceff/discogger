@@ -1,5 +1,6 @@
 ActiveAdmin.register Record do
   config.sort_order = "rating_desc"
+  config.per_page = 5000
   # belongs_to :query
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -17,10 +18,18 @@ ActiveAdmin.register Record do
     column :rating
     column :count
     column :want
+    column "Suggested Price" do |record|
+      unless record.pricing.nil?
+      begin
+        "$#{JSON.parse(record.pricing)["Mint (M)"]["value"].round(2)}"
+      rescue
+      end
+      end
+    end
     column :artists do |record|
       unless record.artists.nil?
       begin
-        JSON.parse(record.artists).join(",")
+        JSON.parse(record.artists).map{|a|a["name"]}.join(",")
       rescue JSON::ParserError
       end
       end

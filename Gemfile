@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 gem 'rails', '~> 4.2'
-gem 'sqlite3', '~> 1.3.6'
+# gem 'sqlite3', '~> 1.3.6' (uncomment if you want the dev database)
+gem 'pg', '~> 0.20'
 
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
@@ -19,3 +20,4 @@ gem 'nokogiri'
 gem 'did_you_mean'
 gem 'activeadmin'
 gem 'dotenv'
+gem 'rails_12factor', group: :production

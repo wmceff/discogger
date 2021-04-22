@@ -89,6 +89,12 @@ class RunQueryJob < ActiveJob::Base
 =end
             puts "adding "+record["title"]
 
+            sleep(2.0)
+            # get suggested pricing 
+            pricing = @access_token.get("/marketplace/price_suggestions/#{record["id"]}")
+            pricing = JSON.parse(pricing.body)
+            puts pricing
+
             Record.create(
               rating: record["community"]["rating"]["average"],
               count: record["community"]["rating"]["count"],
@@ -104,6 +110,7 @@ class RunQueryJob < ActiveJob::Base
               genres: record["genres"].to_json,
               videos: record["videos"].to_json,
               artists: record["artists"].to_json,
+              pricing: pricing.to_json,
             )
           # end
         rescue Exception => e
