@@ -108,6 +108,7 @@ class RunQueryJob < ActiveJob::Base
               country: record["country"],
               year: record["year"],
               genres: record["genres"].to_json,
+              styles: record["styles"].to_json,
               videos: record["videos"].to_json,
               artists: record["artists"].to_json,
               pricing: pricing.to_json,
