@@ -49,6 +49,7 @@ ActiveAdmin.register Record do
       end
     end
     column :styles
+    column :year
     column :videos do |record|
       if record.videos.nil? || record.videos == "null"
         ''
