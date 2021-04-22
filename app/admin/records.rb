@@ -48,7 +48,14 @@ ActiveAdmin.register Record do
       end
       end
     end
-    column :styles
+    column :styles do |record|
+      unless record.styles.nil?
+      begin
+        JSON.parse(record.styles).join(",")
+      rescue JSON::ParserError
+      end
+      end
+    end
     column :year
     column :videos do |record|
       if record.videos.nil? || record.videos == "null"
