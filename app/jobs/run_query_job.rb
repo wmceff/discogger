@@ -112,7 +112,7 @@ class RunQueryJob < ActiveJob::Base
               artists: record["artists"].to_json,
               pricing: pricing.to_json,
               thumb: record["thumb"],
-            )
+            ) if Record.find_by(discogs_id: record["id"]).nil?
           # end
         rescue Exception => e
           puts "error:"
