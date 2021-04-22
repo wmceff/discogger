@@ -1,8 +1,10 @@
 ActiveAdmin.register Query do
-  permit_params :query_string, :current_page, :total_pages
+  permit_params :query_string, :completed_page, :total_pages
 
   index do
     column :query_string
+    column :completed_page
+    column :total_pages
     column "Records" do |q|
       link_to "View Records", "/admin/records?q[query_id_eq]=#{q.id}"
     end

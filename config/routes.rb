@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
-  root 'queries#index'
+  root 'welcome#index'
 
   resources :queries do
     get 'run'

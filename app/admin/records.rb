@@ -34,6 +34,9 @@ ActiveAdmin.register Record do
       end
       end
     end
+    column :image do |record|
+      image_tag record.thumb, height: 150, width: 150
+    end
     column :title do |record|
       link_to record.title, record.uri, target: :blank
     end

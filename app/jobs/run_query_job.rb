@@ -111,6 +111,7 @@ class RunQueryJob < ActiveJob::Base
               videos: record["videos"].to_json,
               artists: record["artists"].to_json,
               pricing: pricing.to_json,
+              thumb: record["thumb"],
             )
           # end
         rescue Exception => e

@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
   def index
-    @queries = Query.all
+    redirect_to "/admin/queries"
   end
 end
