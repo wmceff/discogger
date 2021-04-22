@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
       redirect_to "/"
     else
       if session[:access_token].nil?
-        @callback_url = "http://localhost:3000/oauth/callback"
+        @callback_url = root_url+"oauth/callback"
         @consumer = OAuth::Consumer.new(ENV["DISCOGS_CLIENT_ID"],
                                         ENV["DISCOGS_CLIENT_SECRET"],
                                         :site => "https://api.discogs.com")
