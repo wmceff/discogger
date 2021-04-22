@@ -3,7 +3,7 @@ class Query < ActiveRecord::Base
 
   def query_url
     if total_pages.nil?
-      query_string 
+      query_string
     else
       if completed_page.nil?
         query_string+"&page=2"

@@ -98,7 +98,12 @@ class RunQueryJob < ActiveJob::Base
               # median_price: median_price,
               # high_price: high_price,
               discogs_id: record["id"],
-              query_id: @query.id
+              query_id: @query.id,
+              country: record["country"],
+              year: record["year"],
+              genres: record["genres"].to_json,
+              videos: record["videos"].to_json,
+              artists: record["artists"].to_json,
             )
           # end
         rescue Exception => e

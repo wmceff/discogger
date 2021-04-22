@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210422023041) do
+ActiveRecord::Schema.define(version: 20210422041143) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -49,6 +49,12 @@ ActiveRecord::Schema.define(version: 20210422023041) do
     t.integer  "query_id"
     t.decimal  "median_price"
     t.decimal  "high_price"
+    t.text     "country"
+    t.integer  "year"
+    t.text     "genres"
+    t.text     "videos"
+    t.text     "styles"
+    t.text     "artists"
   end
 
   add_index "records", ["query_id"], name: "index_records_on_query_id"
