@@ -21,7 +21,11 @@ class RunQueryJob < ActiveJob::Base
   end
 
   def fetch_page
-    puts "getting result"
+    # if the heroku web dyno sleeps, so does the worker, so lets keep it awake
+    puts "ensuring the web app is awake"
+    Net::HTTP.get(URI('https://wmceff-discogger.herokuapp.com'))
+    
+    puts "getting page of records"
     puts "'#{@query.query_url}'"
     @search = @access_token.get(@query.query_url)
     puts "got it"

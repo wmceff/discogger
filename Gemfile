@@ -19,5 +19,5 @@ gem 'resque'
 gem 'nokogiri'
 gem 'did_you_mean'
 gem 'activeadmin'
-gem 'dotenv'
+gem 'dotenv-rails'
 gem 'rails_12factor', group: :production

@@ -2,10 +2,13 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_with_discogs
 
   def authenticate_with_discogs
+    puts 'client id'
+    puts ENV['DISCOGS_CLIENT_ID']
+    puts 'yep'
     if params[:oauth_token]
       @request_token = session[:request_token]
       @access_token = @request_token.get_access_token(
-        oauth_token: params[:oauth_token], 
+        oauth_token: params[:oauth_token],
         oauth_verifier: params[:oauth_verifier]
       )
       session[:access_token] = @access_token
